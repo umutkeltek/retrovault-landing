@@ -23,6 +23,7 @@ const privacy = read("privacy/index.html");
 const terms = read("terms/index.html");
 const help = read("help/index.html");
 const aasa = read(".well-known/apple-app-site-association");
+const pagesWorkflow = read(".github/workflows/deploy-pages.yml");
 const combined = `${html}\n${css}\n${js}`;
 
 for (const required of [
@@ -79,3 +80,5 @@ assert(help.includes("RetroVault Help"), "Help page must exist");
 assert(help.includes("retrovault@keltek.ai"), "Help page must include support email");
 assert(aasa.includes("4UG4H7YFQ7.com.retrovault.app"), "AASA must include Team ID and bundle ID");
 assert(aasa.includes("/g/*"), "AASA must include game-detail universal link path");
+assert(!pagesWorkflow.includes("actions/upload-pages-artifact"), "Pages workflow must not use upload-pages-artifact because it strips .well-known");
+assert(pagesWorkflow.includes(".well-known"), "Pages workflow must package .well-known for Universal Links");

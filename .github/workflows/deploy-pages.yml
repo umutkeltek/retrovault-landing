@@ -43,10 +43,27 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare artifact directory
+        run: |
+          mkdir -p "$RUNNER_TEMP/site"
+          cp index.html styles.css script.js robots.txt sitemap.xml CNAME .nojekyll "$RUNNER_TEMP/site/"
+          cp -R assets privacy terms help .well-known "$RUNNER_TEMP/site/"
+
+      - name: Archive artifact
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory "$RUNNER_TEMP/site" \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            .
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
-          path: .
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
       - name: Deploy to GitHub Pages
         id: deployment
