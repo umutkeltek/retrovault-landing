@@ -22,6 +22,7 @@ const sitemap = read("sitemap.xml");
 const privacy = read("privacy/index.html");
 const terms = read("terms/index.html");
 const help = read("help/index.html");
+const aasa = read(".well-known/apple-app-site-association");
 const combined = `${html}\n${css}\n${js}`;
 
 for (const required of [
@@ -75,3 +76,5 @@ assert(terms.includes("RetroVault Terms"), "Terms page must exist");
 assert(terms.includes("legally owned"), "Terms page must include owned-file responsibility");
 assert(help.includes("RetroVault Help"), "Help page must exist");
 assert(help.includes("retrovault@keltek.ai"), "Help page must include support email");
+assert(aasa.includes("4UG4H7YFQ7.com.retrovault.app"), "AASA must include Team ID and bundle ID");
+assert(aasa.includes("/g/*"), "AASA must include game-detail universal link path");
