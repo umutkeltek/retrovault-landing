@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname;
@@ -65,6 +65,7 @@ assert(css.includes("prefers-reduced-motion"), "Styles must respect reduced moti
 assert(js.includes("requestAnimationFrame"), "Hero scene must animate when motion is allowed");
 assert(js.includes("matchMedia(\"(prefers-reduced-motion: reduce)\")"), "JS must respect reduced motion");
 assert(cname === "retrovault.keltek.ai", "CNAME must point to the launch domain");
+assert(existsSync(join(root, ".nojekyll")), "GitHub Pages must serve .well-known files without Jekyll filtering");
 assert(robots.includes("Sitemap: https://retrovault.keltek.ai/sitemap.xml"), "robots.txt must advertise sitemap");
 assert(sitemap.includes("<loc>https://retrovault.keltek.ai/</loc>"), "sitemap must include canonical home URL");
 assert(sitemap.includes("<loc>https://retrovault.keltek.ai/privacy/</loc>"), "sitemap must include privacy page");
