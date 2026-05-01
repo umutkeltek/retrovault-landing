@@ -49,7 +49,9 @@ jobs:
           cp index.html styles.css script.js robots.txt sitemap.xml CNAME .nojekyll "$RUNNER_TEMP/site/"
           cp -R privacy terms help .well-known "$RUNNER_TEMP/site/"
           for directory in assets; do
-            [ -d "$directory" ] && cp -R "$directory" "$RUNNER_TEMP/site/"
+            if [ -d "$directory" ]; then
+              cp -R "$directory" "$RUNNER_TEMP/site/"
+            fi
           done
 
       - name: Archive artifact
