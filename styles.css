@@ -485,6 +485,77 @@ details p {
   border-top: 1px solid var(--line);
 }
 
+.discover-page {
+  padding-top: 78px;
+}
+
+.discover-hero,
+.discover-rules {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.86fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.discover-panel,
+.path-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.discover-panel div,
+.path-list div,
+.source-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(20, 18, 15, 0.72);
+  padding: 1.2rem;
+}
+
+.mini-kicker {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--teal);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.source-card {
+  min-height: 320px;
+}
+
+.source-card p,
+.path-list span {
+  color: var(--muted);
+}
+
+.source-card a {
+  display: inline-flex;
+  margin-top: 1rem;
+  color: var(--teal);
+  font-weight: 900;
+}
+
+.discover-owned-icon {
+  box-shadow: inset 0 -9px 0 var(--amber), inset 0 0 0 8px rgba(232, 164, 92, 0.24);
+}
+
+.discover-homebrew-icon {
+  box-shadow: inset 0 0 0 7px rgba(88, 214, 201, 0.24), inset 14px 0 0 var(--teal);
+}
+
+.discover-public-icon {
+  box-shadow: inset 0 0 0 8px rgba(139, 124, 246, 0.26), inset 0 16px 0 var(--violet);
+}
+
 .link-list {
   display: grid;
   gap: 0.75rem;
@@ -569,6 +640,7 @@ details p {
 .policy-body h2 {
   margin: 0;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
+  scroll-margin-top: 104px;
 }
 
 .policy-body p {
@@ -597,6 +669,9 @@ details p {
   .proof-strip,
   .library-section,
   .compliance-section,
+  .discover-hero,
+  .discover-rules,
+  .catalog-grid,
   .feature-grid,
   .pricing-grid,
   .faq-grid,

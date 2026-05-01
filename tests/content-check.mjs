@@ -22,9 +22,10 @@ const sitemap = read("sitemap.xml");
 const privacy = read("privacy/index.html");
 const terms = read("terms/index.html");
 const help = read("help/index.html");
+const discover = read("discover/index.html");
 const aasa = read(".well-known/apple-app-site-association");
 const pagesWorkflow = read(".github/workflows/deploy-pages.yml");
-const combined = `${html}\n${css}\n${js}`;
+const combined = `${html}\n${css}\n${js}\n${help}\n${discover}`;
 
 for (const required of [
   "RetroVault",
@@ -36,10 +37,14 @@ for (const required of [
   "legally owned",
   "https://retrovault.keltek.ai/privacy",
   "https://retrovault.keltek.ai/terms",
+  "https://retrovault.keltek.ai/discover",
   "https://retrovault.keltek.ai/help",
   "https://github.com/umutkeltek/mgba-retrovault",
   "mGBA source offer",
-  "App Store"
+  "App Store",
+  "Legal Discover",
+  "Import from URL",
+  "Submit a source"
 ]) {
   assert(combined.includes(required), `Missing required launch content: ${required}`);
 }
@@ -71,13 +76,17 @@ assert(robots.includes("Sitemap: https://retrovault.keltek.ai/sitemap.xml"), "ro
 assert(sitemap.includes("<loc>https://retrovault.keltek.ai/</loc>"), "sitemap must include canonical home URL");
 assert(sitemap.includes("<loc>https://retrovault.keltek.ai/privacy/</loc>"), "sitemap must include privacy page");
 assert(sitemap.includes("<loc>https://retrovault.keltek.ai/terms/</loc>"), "sitemap must include terms page");
+assert(sitemap.includes("<loc>https://retrovault.keltek.ai/discover/</loc>"), "sitemap must include discover page");
 assert(sitemap.includes("<loc>https://retrovault.keltek.ai/help/</loc>"), "sitemap must include help page");
 assert(privacy.includes("RetroVault Privacy Policy"), "Privacy page must exist");
 assert(privacy.includes("No ROMs are included"), "Privacy page must repeat no-ROM posture");
 assert(terms.includes("RetroVault Terms"), "Terms page must exist");
 assert(terms.includes("legally owned"), "Terms page must include owned-file responsibility");
 assert(help.includes("RetroVault Help"), "Help page must exist");
+assert(help.includes('id="import-from-url"'), "Help page must include import-from-url anchor");
 assert(help.includes("retrovault@keltek.ai"), "Help page must include support email");
+assert(discover.includes("RetroVault Legal Discover"), "Discover page must exist");
+assert(discover.includes("Submit a source"), "Discover page must include source submission");
 assert(aasa.includes("4UG4H7YFQ7.com.retrovault.app"), "AASA must include Team ID and bundle ID");
 assert(aasa.includes("/g/*"), "AASA must include game-detail universal link path");
 assert(!pagesWorkflow.includes("actions/upload-pages-artifact"), "Pages workflow must not use upload-pages-artifact because it strips .well-known");
