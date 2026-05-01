@@ -19,6 +19,9 @@ const js = read("script.js");
 const cname = read("CNAME").trim();
 const robots = read("robots.txt");
 const sitemap = read("sitemap.xml");
+const privacy = read("privacy/index.html");
+const terms = read("terms/index.html");
+const help = read("help/index.html");
 const combined = `${html}\n${css}\n${js}`;
 
 for (const required of [
@@ -63,3 +66,12 @@ assert(js.includes("matchMedia(\"(prefers-reduced-motion: reduce)\")"), "JS must
 assert(cname === "retrovault.keltek.ai", "CNAME must point to the launch domain");
 assert(robots.includes("Sitemap: https://retrovault.keltek.ai/sitemap.xml"), "robots.txt must advertise sitemap");
 assert(sitemap.includes("<loc>https://retrovault.keltek.ai/</loc>"), "sitemap must include canonical home URL");
+assert(sitemap.includes("<loc>https://retrovault.keltek.ai/privacy/</loc>"), "sitemap must include privacy page");
+assert(sitemap.includes("<loc>https://retrovault.keltek.ai/terms/</loc>"), "sitemap must include terms page");
+assert(sitemap.includes("<loc>https://retrovault.keltek.ai/help/</loc>"), "sitemap must include help page");
+assert(privacy.includes("RetroVault Privacy Policy"), "Privacy page must exist");
+assert(privacy.includes("No ROMs are included"), "Privacy page must repeat no-ROM posture");
+assert(terms.includes("RetroVault Terms"), "Terms page must exist");
+assert(terms.includes("legally owned"), "Terms page must include owned-file responsibility");
+assert(help.includes("RetroVault Help"), "Help page must exist");
+assert(help.includes("retrovault@keltek.ai"), "Help page must include support email");
