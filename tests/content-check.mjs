@@ -82,3 +82,4 @@ assert(aasa.includes("4UG4H7YFQ7.com.retrovault.app"), "AASA must include Team I
 assert(aasa.includes("/g/*"), "AASA must include game-detail universal link path");
 assert(!pagesWorkflow.includes("actions/upload-pages-artifact"), "Pages workflow must not use upload-pages-artifact because it strips .well-known");
 assert(pagesWorkflow.includes(".well-known"), "Pages workflow must package .well-known for Universal Links");
+assert(pagesWorkflow.includes("[ -d \"$directory\" ]"), "Pages workflow must tolerate optional asset directories that are not tracked");

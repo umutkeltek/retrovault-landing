@@ -47,7 +47,10 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/site"
           cp index.html styles.css script.js robots.txt sitemap.xml CNAME .nojekyll "$RUNNER_TEMP/site/"
-          cp -R assets privacy terms help .well-known "$RUNNER_TEMP/site/"
+          cp -R privacy terms help .well-known "$RUNNER_TEMP/site/"
+          for directory in assets; do
+            [ -d "$directory" ] && cp -R "$directory" "$RUNNER_TEMP/site/"
+          done
 
       - name: Archive artifact
         run: |
